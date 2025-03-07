@@ -3,7 +3,7 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "type": "module",
   "exports": {
     "import": "./dist/index.esm.js",
@@ -14,7 +14,8 @@
     "dev": "vite",
     "build": "rollup -c",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "publish": "npm publish --access public"
   },
   "peerDependencies": {
     "react": "^19.0.0",

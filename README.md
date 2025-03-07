@@ -12,7 +12,8 @@ npm install @janderdev/j-lib
 yarn add @janderdev/j-lib
 ```
 ## Componentes
-J_input
+
+### J_input
 O J_input é um campo de entrada altamente configurável com diversos adornos à esquerda e à direita, além de várias opções de personalização.
 
 ## Uso
