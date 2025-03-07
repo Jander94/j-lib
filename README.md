@@ -1,54 +1,87 @@
-# React + TypeScript + Vite
+# J-lib
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+J-lib é uma biblioteca de componentes reutilizáveis em React para facilitar o desenvolvimento de interfaces de usuário. Ela oferece uma série de componentes configuráveis para simplificar a criação de interfaces flexíveis e acessíveis.
 
-Currently, two official plugins are available:
+## Instalação
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Para adicionar J-lib ao seu projeto, execute o seguinte comando no terminal:
 
-## Expanding the ESLint configuration
+```bash
+npm install @janderdev/j-lib
+# ou
+yarn add @janderdev/j-lib
+```
+## Componentes
+J_input
+O J_input é um campo de entrada altamente configurável com diversos adornos à esquerda e à direita, além de várias opções de personalização.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Uso
+Aqui está um exemplo de como usar o componente J_input da biblioteca:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```tsx
+import React, { useState } from "react";
+import J_input from "@janderdev/j-lib";
+
+const ExampleComponent = () => {
+  const [inputValue, setInputValue] = useState<number>(0);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const num = parseInt(e.target.value);
+    setInputValue(num);
+  };
+
+  const handlePlusChange = () => {
+    setInputValue(inputValue + 1);
+  };
+
+  const handleMinusChange = () => {
+    setInputValue(inputValue - 1);
+  };
+
+  return (
+    <div>
+      <J_Input
+        label="Quantidade"
+        value={inputValue.toString()}
+        center
+        leftAdornment
+        leftAdornmentText="-"
+        rightAdornment
+        rightAdornmentText="+"
+        change={handleChange}
+        leftAdornmentClick={handleMinusChange}
+        rightAdornmentClick={handlePlusChange}
+      />
+    </div>
+  );
+};
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| Nome do Parâmetro    | Tipo                | Descrição                                                                 |
+|----------------------|---------------------|---------------------------------------------------------------------------|
+| `label`              | `string`            | O texto exibido como rótulo do input.                                     |
+| `required`           | `boolean`           | Exibe um * se o campo é obrigatório.                                      |
+| `value`              | `string`            | O valor atual do input.                                                   |
+| `change`             | `function`          | Função de callback chamada quando o valor do input é alterado.            |
+| `placeholder`        | `string`            | Texto exibido quando o input está vazio.                                  |
+| `widthInput`         | `number`            | Largura do input.                                                         |
+| `disabled`           | `boolean`           | Define se o input está desabilitado.                                      |
+| `leftAdornment`      | `boolean`           | Exibe um adorno à esquerda do input.                                      |
+| `rightAdornment`     | `boolean`           | Exibe um adorno à direita do input.                                       |
+| `leftAdornmentText`  | `string`            | Texto exibido no adorno esquerdo.                                         |
+| `rightAdornmentText` | `string`            | Texto exibido no adorno direito.                                          |
+| `leftAdornmentIcon`  | `ReactNode`         | Ícone exibido no adorno esquerdo.                                         |
+| `rightAdornmentIcon` | `ReactNode`         | Ícone exibido no adorno direito.                                          |
+| `leftAdornmentClick` | `function`          | Função de callback chamada ao clicar no adorno esquerdo.                  |
+| `rightAdornmentClick`| `function`          | Função de callback chamada ao clicar no adorno direito.                   |
+| `min`                | `number`            | Valor mínimo do input.                                                    |
+| `max`                | `number`            | Valor máximo do input.                                                    |
+| `minLength`          | `number`            | Comprimento mínimo do valor inserido.                                     |
+| `maxLength`          | `number`            | Comprimento máximo do valor inserido.                                     |
+| `multiline`          | `boolean`           | Define se o input é multilinha (texto).                                   |
+| `center`             | `boolean`           | Define se o texto no input deve ser centralizado.                         |
+| `inputStyleProps`    | `React.CSSProperties`| Estilos adicionais para o input.                                         |
+| `labelStyleProps`    | `React.CSSProperties`| Estilos adicionais para a label.                                         |
+| `leftAdornmentStyleProps` | `React.CSSProperties`| Estilos adicionais para o adorno esquerdo.                          |
+| `rightAdornmentStyleProps`| `React.CSSProperties`| Estilos adicionais para o adorno direito.                           |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```

@@ -51,7 +51,7 @@ const J_input: React.FC<J_InputInterface> = ({
   const inputStyle: React.CSSProperties = {
     width: widthInput,
     height: hightInput,
-    borderColor: Colors.border,
+    border: `1px solid ${Colors.border}`,
     borderRadius: 8,
     borderTopLeftRadius: leftAdornment ? 0 : 8,
     borderBottomLeftRadius: leftAdornment ? 0 : 8,
