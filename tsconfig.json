@@ -8,8 +8,9 @@
     "esModuleInterop": true,
     "declaration": true,
     "emitDeclarationOnly": true,
+    "declarationMap": false,
     "outDir": "dist",
-    "composite": true
+    "skipLibCheck": true
   },
   "include": ["src"]
 }
