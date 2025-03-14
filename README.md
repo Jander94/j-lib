@@ -85,4 +85,4 @@ const ExampleComponent = () => {
 | `labelStyleProps`    | `React.CSSProperties`| Estilos adicionais para a label.                                         |
 | `leftAdornmentStyleProps` | `React.CSSProperties`| Estilos adicionais para o adorno esquerdo.                          |
 | `rightAdornmentStyleProps`| `React.CSSProperties`| Estilos adicionais para o adorno direito.                           |
-
+| `mask`                    | `string`             | Define a máscara de formatação do campo. Utilize `#` para representar dígitos numéricos. Exemplo: `(##) #####-####` para um número de telefone.                                                |
