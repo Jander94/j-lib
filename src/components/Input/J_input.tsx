@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { Colors } from "../../colors";
 import { J_InputInterface } from "./J_InputInterface";
 
@@ -30,7 +30,8 @@ const J_input: React.FC<J_InputInterface> = ({
   inputStyleProps,
   labelStyleProps,
   leftAdornmentStyleProps,
-  rightAdornmentStyleProps
+  rightAdornmentStyleProps,
+  mask
 }) => {
   const hightInput = 40
   const widthAdornment = 50
@@ -87,6 +88,24 @@ const J_input: React.FC<J_InputInterface> = ({
     cursor: rightAdornmentClick !== undefined ? 'pointer' : 'default'
   }
 
+  function addMask(inputValue: string) {
+    if(!mask) return inputValue
+    const numericValue = inputValue.replace(/\D/g, "");
+    let i = 0;
+    const formattedValue = mask.replace(/#/g, () => numericValue[i++] || "");
+    return  formattedValue;
+  }
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    if (change) {
+      if(mask && value && typeof value === 'string' && e.target.value.length > value.length) {
+        change(addMask(e.target.value))
+      } else {
+        change((e.target.value))
+      }
+    }
+  }
+
   return (
     <div style={containerStyle}>
       {/* Label */}
@@ -110,9 +129,7 @@ const J_input: React.FC<J_InputInterface> = ({
           style={{...inputStyle, ...inputStyleProps}}
           value={value || undefined}
           placeholder={placeholder}
-          onChange={(e) => {
-            change && change(e)
-          }}
+          onChange={(e) => handleChange(e)}
           type={type}
           max={max}
           maxLength={maxLength}

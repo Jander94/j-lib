@@ -29,4 +29,5 @@ export interface J_InputInterface {
   labelStyleProps?: React.CSSProperties;
   leftAdornmentStyleProps?: React.CSSProperties;
   rightAdornmentStyleProps?: React.CSSProperties;
+  mask?: string;
 }
