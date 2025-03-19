@@ -21,41 +21,33 @@ Aqui está um exemplo de como usar o componente J_input da biblioteca:
 
 ```tsx
 import React, { useState } from "react";
-import J_input from "@janderdev/j-lib";
+import { J_Input } from "@janderdev/j-lib";
 
-const ExampleComponent = () => {
-  const [inputValue, setInputValue] = useState<number>(0);
+function App() {
+  const [inputValue, setInputValue] = useState<string>("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const num = parseInt(e.target.value);
-    setInputValue(num);
+  const handleChange = (e: string) => {
+    setInputValue(e);
   };
 
-  const handlePlusChange = () => {
-    setInputValue(inputValue + 1);
-  };
-
-  const handleMinusChange = () => {
-    setInputValue(inputValue - 1);
+  const changeRightAdornment = () => {
+    alert("Pesquisando por: " + inputValue);
   };
 
   return (
     <div>
       <J_Input
-        label="Quantidade"
-        value={inputValue.toString()}
-        center
-        leftAdornment
-        leftAdornmentText="-"
+        label="Pesquisar"
+        value={inputValue}
         rightAdornment
-        rightAdornmentText="+"
+        rightAdornmentText="🔎"
         change={handleChange}
-        leftAdornmentClick={handleMinusChange}
-        rightAdornmentClick={handlePlusChange}
+        rightAdornmentClick={changeRightAdornment}
+        rightAdornmentStyleProps={{ backgroundColor: "lightgray" }}
       />
     </div>
   );
-};
+}
 ```
 
 | Nome do Parâmetro    | Tipo                | Descrição                                                                 |
